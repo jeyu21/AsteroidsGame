@@ -1,29 +1,45 @@
 Spaceship bob = new Spaceship();
-Star[] nightSky = new Star[200];
-Asteroid[] tim = new Asteroid[3];
+Star[] nightSky = new Star[500];
+ArrayList <Asteroid> jim;
+
+
 public void setup() 
 {
-  size(500, 500);
-  background(0);
+
+  size(800, 800);
+  background(10, 10, 20);
+
+
+  jim = new ArrayList <Asteroid>();
+  for (int j = 0; j<50;j++){
+    jim.add(j, new Asteroid());
+
+  }
 
   for(int i =0; i<nightSky.length; i++){
     nightSky[i] = new Star();
 }
-  for(int j =0; j<tim.length; j++){
-    tim[j] = new Asteroid();
-}
+  
 
 }
 public void draw() 
 {
-  background(0);
+  noStroke();
+  background(05, 05, 30);
+//star
   for(int i =0; i<nightSky.length; i++){
     nightSky[i].show();
   }
-   for(int j =0; j<tim.length; j++){
-    tim[j].show();
-    tim[j].move();
+
+//asteroid
+   for(int j =0; j<jim.size(); j++){
+    jim.get(j).move();
+    jim.get(j).show();
+    if(dist(bob.getX(), bob.getY(), jim.get(j).getX(), jim.get(j).getY()) < 30) 
+      jim.remove(j);   
+
   }
+
   bob.show();
   bob.move();
 
@@ -99,7 +115,7 @@ public void draw()
 
   public void show ()  //Draws the floater at the current position  
   {             
-    fill(myColor); 
+    fill(100,100,100); 
 
   
     //convert degrees to radians for sin and cos         
@@ -222,7 +238,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  //Draws the floater at the current position  
   {             
-    fill(myColor); 
+    fill(250,50,150); 
 
   
     //convert degrees to radians for sin and cos         
@@ -243,12 +259,12 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 class Star{
   private int myX, myY;
   public Star(){
-    myX = (int)(Math.random()*500);
-    myY = (int)(Math.random()*500);
+    myX = (int)(Math.random()*800);
+    myY = (int)(Math.random()*800);
   }
   public void show() {
     fill(250);
-    ellipse(myX,myY,5,5);
+    ellipse(myX,myY,3,3);
   }
 }
 
